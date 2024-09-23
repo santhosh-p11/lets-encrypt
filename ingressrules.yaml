@@ -1,0 +1,36 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    cert-manager.io/cluster-issuer: kubeissuer
+    nginx.ingress.kubernetes.io/rewrite-target: /
+  name: my-ingress
+spec:
+  ingressClassName: nginx
+  tls:
+  - hosts:
+    - one.arunm.online
+    - two.arunm.online
+    secretName: private
+  rules:
+  - host: one.arunm.online
+    http:
+      paths:
+      - pathType: Prefix
+        path: /
+        backend:
+          service:
+            name: app1-svc
+            port:
+              number: 80
+  
+  - host: two.arunm.online
+    http:
+      paths:
+      - pathType: Prefix
+        path: /
+        backend:
+          service:
+            name: app2-svc
+            port:
+              number: 85
