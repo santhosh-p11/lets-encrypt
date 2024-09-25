@@ -13,7 +13,7 @@ spec:
     spec:
       containers:
       - name: myapp
-        image: arunagri03/enginx.v2
+        image: nginx
         ports:
         - containerPort: 80
 ---
